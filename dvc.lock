@@ -1,0 +1,96 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py zomato_df_final_data.csv 
+      data/processed/preprocessed.csv
+    deps:
+    - path: src/preprocess.py
+      hash: md5
+      md5: 91963c0e37e38cc845ccfd78986f7da1
+      size: 483
+    - path: zomato_df_final_data.csv
+      hash: md5
+      md5: 6bb696eac5889d15f134cee5ff09eb5d
+      size: 2690897
+    outs:
+    - path: data/processed/preprocessed.csv
+      hash: md5
+      md5: 1376bd243fa4315011589282c8a231d1
+      size: 1833752
+  feature_engineering:
+    cmd: python src/feature_engineering.py data/processed/preprocessed.csv 
+      data/processed/features.csv
+    deps:
+    - path: data/processed/preprocessed.csv
+      hash: md5
+      md5: 1376bd243fa4315011589282c8a231d1
+      size: 1833752
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: 5033cd96e8b7360cfe3960f2156cf6b2
+      size: 691
+    outs:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: af4566ca064abb25340eee3ea29dd078
+      size: 1942276
+  regression:
+    cmd: python src/regression.py data/processed/features.csv 
+      models/regression_model.pkl
+    deps:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: af4566ca064abb25340eee3ea29dd078
+      size: 1942276
+    - path: src/regression.py
+      hash: md5
+      md5: 9f9d7c183572b7ef36b60d42f8c82747
+      size: 734
+    outs:
+    - path: models/regression_model.pkl
+      hash: md5
+      md5: 8b90ad783484fc269931885090e3913d
+      size: 654
+  classification:
+    cmd: python src/classification.py data/processed/features.csv 
+      models/classification_model.pkl
+    deps:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: af4566ca064abb25340eee3ea29dd078
+      size: 1942276
+    - path: src/classification.py
+      hash: md5
+      md5: fdf0d95c0f56920d66a2ecf44e6c7aad
+      size: 1314
+    outs:
+    - path: models/classification_model.pkl
+      hash: md5
+      md5: 64f06c1cf6fffde6da18c5763216765b
+      size: 902
+  evaluate:
+    cmd: python src/evaluate.py models/regression_model.pkl 
+      models/classification_model.pkl data/processed/features.csv 
+      reports/metrics.json
+    deps:
+    - path: data/processed/features.csv
+      hash: md5
+      md5: af4566ca064abb25340eee3ea29dd078
+      size: 1942276
+    - path: models/classification_model.pkl
+      hash: md5
+      md5: 64f06c1cf6fffde6da18c5763216765b
+      size: 902
+    - path: models/regression_model.pkl
+      hash: md5
+      md5: 8b90ad783484fc269931885090e3913d
+      size: 654
+    - path: src/evaluate.py
+      hash: md5
+      md5: 118f5797202638682bf9246e9241417e
+      size: 1247
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: c7ef16be84182e24d994b1b1e25d3fcf
+      size: 95
