@@ -1,0 +1,5 @@
+
+{"customer_id": 1, "ts": "2024-08-01T10:21:00", "page": "home", "device": "mobile"}
+{"customer_id": 1, "ts": "2024-08-10T08:02:00", "page": "product", "device": "desktop"}
+{"customer_id": 2, "ts": "2024-08-03T12:09:00", "page": "home", "device": "desktop"}
+{"customer_id": 4, "ts": "2024-08-15T09:55:00", "page": "checkout", "device": "mobile"}
