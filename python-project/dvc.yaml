@@ -1,0 +1,42 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py zomato_df_final_data.csv data/processed/preprocessed.csv
+    deps:
+      - src/preprocess.py
+      - zomato_df_final_data.csv
+    outs:
+      - data/processed/preprocessed.csv
+
+  feature_engineering:
+    cmd: python src/feature_engineering.py data/processed/preprocessed.csv data/processed/features.csv
+    deps:
+      - src/feature_engineering.py
+      - data/processed/preprocessed.csv
+    outs:
+      - data/processed/features.csv
+
+  regression:
+    cmd: python src/regression.py data/processed/features.csv models/regression_model.pkl
+    deps:
+      - src/regression.py
+      - data/processed/features.csv
+    outs:
+      - models/regression_model.pkl
+
+  classification:
+    cmd: python src/classification.py data/processed/features.csv models/classification_model.pkl
+    deps:
+      - src/classification.py
+      - data/processed/features.csv
+    outs:
+      - models/classification_model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py models/regression_model.pkl models/classification_model.pkl data/processed/features.csv reports/metrics.json
+    deps:
+      - src/evaluate.py
+      - models/regression_model.pkl
+      - models/classification_model.pkl
+      - data/processed/features.csv
+    outs:
+      - reports/metrics.json
