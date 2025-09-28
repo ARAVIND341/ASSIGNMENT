@@ -10,7 +10,9 @@ if __name__ == "__main__":
 
     df = pd.read_csv(inp)
 
-    # Label + features
+    ##here we are doing linear regression
+
+    # Label and features
     y = df["rating_number"] if "rating_number" in df.columns else pd.Series([0]*len(df))
     X = df.drop(columns=[c for c in ["rating_number","is_popular"] if c in df.columns], errors="ignore")
     X = X.select_dtypes(include=["number"]).fillna(0)
