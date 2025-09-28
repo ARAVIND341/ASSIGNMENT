@@ -28,7 +28,7 @@ Some of the installed dependencies includes,
 
   
 
-3)What results to expect?
+3)What are the expected results?
 
 
   In dvc.yaml, we are defining the stages for classification, regression etc.
