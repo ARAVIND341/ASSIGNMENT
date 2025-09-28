@@ -23,13 +23,20 @@ Some of the installed dependencies includes,
   The command to run it is:
     dvc repro
 
-  This will reproduce the pipeline and run various stages in it.
-  It will process the zomato dataset, helps to generate features, put in steps to train and test regression and classification models and helps to save ecaluation metrics.
+  This will reproduce the pipeline and run various stages in it like preprocessing,feature engineering,regression,classification,evaluation.
+  It will process the zomato dataset, helps to generate features, put in steps to train and test regression and classification models and helps to save evaluation metrics.
+
+  
 
 3)What results to expect?
 
+
   In dvc.yaml, we are defining the stages for classification, regression etc.
+
   In regression, we are training the model to predict the rating_number where the results are stored in regression_model.pkl stored in the models folder and the metric is MSE
-  In classification, restaurants are classified to be more known and less known ones, and the metrics is the accuracy we get at the end which is stored in metrics.json
+
+  In classification, restaurants are classified to be more known and less known ones, and the metrics is the accuracy.
+
+  The results can be seen in the metrics.json file in reports
   
   
